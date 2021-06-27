@@ -1,0 +1,84 @@
+﻿<Window x:Class="ToDoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoApp"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Left="600"
+        Top="300"
+        ResizeMode="NoResize"
+        Height="300" Width="650"
+        DataContext="MainWindow.xaml.cs" Name="MainWindowName"
+        Loaded="MainWindow_OnLoaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Добро пожаловать в планировщик задач " Margin=" 0 5 0 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="dateComboBox" 
+                   
+                   HorizontalAlignment="Left"
+                   Height="20"
+                   Grid.Column="1"
+                   Width="130"
+                   Margin="120,5,0,5">
+
+            <ComboBoxItem Content="на сегодня"  x:Name ="today" Selected="Today_OnSelected"/>
+            <ComboBoxItem Content="на вчера" x:Name="yesterday" Selected="Yesterday_OnSelected"  />
+            <ComboBoxItem Content="за последнюю неделю" Selected="LastWeek_OnSelected" x:Name="lastWeek"/>
+        </ComboBox>
+
+
+
+        <TextBlock Text="Мои планы:" Grid.Row="1" HorizontalAlignment="Center"/>
+        <ListView
+            PreviewMouseDoubleClick="MyPlansListView_OnPreviewMouseDoubleClick"
+            Grid.Row="1"
+            Margin="0,19,0,1"
+            Width="300"
+            
+            x:Name="MyPlansListView">
+
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" x:Name="DeleteTask" Click="DeleteTask_OnClick"  />
+                </ContextMenu>
+
+            </ListBox.ContextMenu>
+        </ListView>
+
+        <TextBlock
+            Text="Описание"
+            Margin="0 5 0 0"
+            HorizontalAlignment="Center"
+            Grid.ColumnSpan="2"
+            Grid.Column="1"
+            Grid.Row="1"/>
+
+        <TextBox TextWrapping="Wrap"
+                 x:Name="DescriptionTextBlock"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0,19,0,1"
+                 Width="300"
+                 Visibility="Hidden"
+                 VerticalScrollBarVisibility="Auto"
+                 IsReadOnly="True"                
+        />
+
+
+        <Button Grid.Row="3" x:Name="AddToDoButton" Click="AddToDoButton_OnClick" Height="20" Width="80" Content="Добавить"/>
+
+    </Grid>
+</Window>
